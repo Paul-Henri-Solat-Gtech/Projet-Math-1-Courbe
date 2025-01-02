@@ -60,9 +60,8 @@ def DrawRandShape():
     while len(listPoints) < 5:
         newX = randomInt(-25,25)
 
-        if len(listPoints) > 0:
-            while newX in [point[0] for point in listPoints]:
-                newX = randomInt(-25,25)
+        while newX in [point[0] for point in listPoints]:
+            newX = randomInt(-25,25)
 
         newY = randomInt(-25,25)
 
