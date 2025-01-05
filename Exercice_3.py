@@ -33,8 +33,8 @@ def TraceInteractive():
     ax.set_title("Polynome d'Hermite - Points Interactifs")
     ax.grid(True)
 
-    points = []
-
+    points = []    
+    
     # Mise à jour de la courbe
     def update_plot(event):
         ax.cla()
@@ -46,7 +46,7 @@ def TraceInteractive():
             for i in range(len(points) - 1):
                 ListX = [points[i][0], points[i + 1][0]]
                 ListY = [points[i][1], points[i + 1][1]]
-                y_derived = [0, 0]  # Par défaut, dérivée nulle
+                y_derived = [points[i][2], points[i][3]]  
                 PlayerCurve(ax, ListX, ListY, y_derived)
         plt.draw()
 
@@ -56,7 +56,9 @@ def TraceInteractive():
             try:
                 x_val = float(x_input.text)
                 y_val = float(y_input.text)
-                points.append((x_val, y_val))
+                derived_enter_val = float(derived_enter_input.text)
+                derived_exit_val = float(derived_exit_input.text)
+                points.append((x_val, y_val, derived_enter_val, derived_exit_val))
                 ax.plot(x_val, y_val, 'ro')  # Point rouge pour chaque point ajouté
                 plt.draw()
             except ValueError:
@@ -73,11 +75,18 @@ def TraceInteractive():
         plt.draw()
 
     # Widgets
-    axbox_x = fig.add_axes([0.1, 0.25, 0.3, 0.05])  # Zone de saisie pour X
+    axbox_x = fig.add_axes([0.1, 0.25, 0.15, 0.05])  # Zone de saisie pour X
     x_input = TextBox(axbox_x, 'X:', initial="0")
 
-    axbox_y = fig.add_axes([0.5, 0.25, 0.3, 0.05])  # Zone de saisie pour Y
+    axbox_y = fig.add_axes([0.3, 0.25, 0.15, 0.05])  # Zone de saisie pour Y
     y_input = TextBox(axbox_y, 'Y:', initial="0")
+    
+    derived_enter = fig.add_axes([0.6, 0.25, 0.1, 0.05])  # Zone de saisie pour derivé intérieure 
+    derived_enter_input = TextBox(derived_enter, 'Départ:', initial="0")
+
+    derived_exit = fig.add_axes([0.8, 0.25, 0.1, 0.05])  # Zone de saisie pour derivé extérieure
+    derived_exit_input = TextBox(derived_exit, 'Arrivée:', initial="0")
+
 
     add_ax = fig.add_axes([0.1, 0.1, 0.2, 0.075])  # Bouton pour ajouter un point
     add_button = Button(add_ax, 'Add Point')
@@ -103,7 +112,7 @@ def RandomFloat(min, max):
     randNb = random.uniform(min, max)
     return round(randNb, 1)
 
-# plotCurve
+
 def PlotCurve(ListPosX, ListPosY, ListPosY_derived):
     n=len(ListPosX)
     for i in range(n-1):
@@ -166,7 +175,7 @@ def DrawRandShape():
     ax.set_yticks(np.arange(math.floor(y_min), math.ceil(y_max) + 1, 2))  # Pas de 1 en y
     plt.show()
 
-# Random curve
+# Random Shape
 DrawRandShape()
 
 # Execute the interactive trace

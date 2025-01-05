@@ -1,12 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import math
-import random
-from math import*
-
-import numpy as np
-import matplotlib.pyplot as plt
-import math
 from math import*
 
 def hermite(x, ListX, ListY, y_derived):
@@ -134,7 +128,6 @@ def Trace():
         plt.ylabel('y')
         plt.title('Polynome d Hermite')
         plt.grid(True)
-        # plt.legend()
 
         ax = plt.gca()
         ax.set_aspect('equal', adjustable='datalim')
