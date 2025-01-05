@@ -2,7 +2,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import math
 import random
-from math import*
 
 def randomInt(min, max):
     randNb = random.randint(min, max)
