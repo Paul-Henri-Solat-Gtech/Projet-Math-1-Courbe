@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from math import*
+from math import pi
 
 def factorial(n):
     fact = 1
@@ -38,7 +38,7 @@ def drawEllipse(posX, posY, sizeX, sizeY):
     # Ajouter des étiquettes et un titre
     plt.xlabel("x")
     plt.ylabel("f(x)")
-    plt.title("Courbe de f(x) = cos(x)")
+    plt.title("Ellipse")
 
 
     # Afficher le graphique
