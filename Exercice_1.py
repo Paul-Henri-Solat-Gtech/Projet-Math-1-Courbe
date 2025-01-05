@@ -1,7 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-import math
-from math import*
+from math import py
 
 def factorial(n):
     fact = 1
