@@ -1,26 +1,27 @@
 import matplotlib.pyplot as plt
 from matplotlib.widgets import Button, TextBox
 import numpy as np
-
 import math
 import random
-from math import*
 
 # Hermite function
-def hermite(x, ListX, ListY, y_derived):
+def Hermite(x, ListX, ListY, y_derived):
     xi = ListX[0]
     xii = ListX[1]
-    th = (x - xi) / (xii - xi)
-    h1 = 2 * th**3 - 3 * th**2 + 1
-    h2 = -2 * th**3 + 3 * th**2
-    h3 = th**3 - 2 * th**2 + th
-    h4 = th**3 - th**2
-    return ListY[0] * h1 + ListY[1] * h2 + y_derived[0] * h3 + y_derived[1] * h4
+        
+    th = ((x - xi)/(xii - xi))
+     
+    h1 = 2*th**3 - 3*th**2+1
+    h2 = -2*th**3+3*th**2
+    h3 = th**3-2*th**2+th
+    h4 = th**3-th**2
+    result = ListY[0]*h1 + ListY[1]*h2 + y_derived[0]*h3 + y_derived[1]*h4
+    return result
 
 # Plot Hermite curve
-def plotCurve(ax, ListX, ListY, y_derived):
+def PlayerCurve(ax, ListX, ListY, y_derived):
     x_vals = np.linspace(ListX[0], ListX[1], 100)
-    y_vals = [hermite(x, ListX, ListY, y_derived) for x in x_vals]
+    y_vals = [Hermite(x, ListX, ListY, y_derived) for x in x_vals]
     ax.plot(x_vals, y_vals, 'b')
 
 # Interactive point insertion
@@ -46,7 +47,7 @@ def TraceInteractive():
                 ListX = [points[i][0], points[i + 1][0]]
                 ListY = [points[i][1], points[i + 1][1]]
                 y_derived = [0, 0]  # Par défaut, dérivée nulle
-                plotCurve(ax, ListX, ListY, y_derived)
+                PlayerCurve(ax, ListX, ListY, y_derived)
         plt.draw()
 
     # Ajouter un point
@@ -95,15 +96,15 @@ def TraceInteractive():
 #-------------------------------------------------------
 
 # Random numbers
-def randomInt(min, max):
+def RandomInt(min, max):
     randNb = random.randint(min, max)
     return(randNb)
-def randomFloat(min, max):
+def RandomFloat(min, max):
     randNb = random.uniform(min, max)
     return round(randNb, 1)
 
-# plotCurve V2
-def plotCurveV2(ListPosX, ListPosY, ListPosY_derived):
+# plotCurve
+def PlotCurve(ListPosX, ListPosY, ListPosY_derived):
     n=len(ListPosX)
     for i in range(n-1):
         x_points = [ListPosX[i],ListPosX[i+1]]
@@ -114,7 +115,7 @@ def plotCurveV2(ListPosX, ListPosY, ListPosY_derived):
         x_vals = np.linspace(ListPosX[i], ListPosX[i+1], 400)
 
         # Calculer les valeurs de y pour ces x en utilisant le polynome de Lagrange
-        y_vals = [hermite(x, x_points, y_points, y_derived) for x in x_vals]
+        y_vals = [Hermite(x, x_points, y_points, y_derived) for x in x_vals]
 
         # Tracer le polynome de Lagrange et les points de donnees
         plt.plot(x_vals, y_vals, label=f'Segment {i + 1}', color='black')
@@ -126,23 +127,23 @@ def Shape(xA,yA,yyA,xB,yB,yyB,xC,yC,yyC,xD,yD,yyD):
         ListX = [xA, xB, xC, xD, xA]
         ListY = [yA, yB, yC, yD, yA]
         ListY_derived = [yyA, yyB, yyC, yyD,yyA]
-        plotCurveV2(ListX, ListY, ListY_derived)
+        PlotCurve(ListX, ListY, ListY_derived)
 
 def DrawRandShape():
     listPoints = []
     listCoef = []
 
     while len(listCoef) < 5 :
-        newCoef = randomFloat(-5,5)
+        newCoef = RandomFloat(-5,5)
         listCoef.append(newCoef)
 
     while len(listPoints) < 5:
-        newX = randomInt(-10,10)
+        newX = RandomInt(-10,10)
 
         while newX in [point[0] for point in listPoints]:
-            newX = randomInt(-10,10)
+            newX = RandomInt(-10,10)
 
-        newY = randomInt(-10,10)
+        newY = RandomInt(-10,10)
 
         listPoints.append((newX, newY))
     Shape(listPoints[0][0],listPoints[0][1],listCoef[0],listPoints[1][0],listPoints[1][1],listCoef[1],listPoints[2][0],listPoints[2][1],listCoef[2],listPoints[3][0],listPoints[3][1],listCoef[3])
