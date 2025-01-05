@@ -174,6 +174,25 @@ def DrawRandShape():
     ax.set_xticks(np.arange(math.floor(x_min), math.ceil(x_max) + 1, 2))  # Pas de 1 en x
     ax.set_yticks(np.arange(math.floor(y_min), math.ceil(y_max) + 1, 2))  # Pas de 1 en y
     plt.show()
+    
+def Mirror(ListPosX, ListPosY, ListPosY_derived):
+    newListX = ListPosX[::-1]
+    newListY = [-x for x in ListPosY[::-1]]
+    newListY_derived =ListPosY_derived[::-1]
+    n=len(newListX)
+    for i in range(n-1):
+        x_points = [newListX[i],newListX[i+1]]
+        y_points = [newListY[i],newListY[i+1]]
+        y_derived = [newListY_derived[i],newListY_derived[i+1]]
+    
+    # Generer des valeurs x pour dessiner le polynome
+        x_vals = np.linspace(newListX[i], newListX[i+1], 400)
+
+    # Calculer les valeurs y pour ces x en utilisant le polynome de Lagrange
+        y_vals = [Hermite(x, x_points, y_points, y_derived) for x in x_vals]
+
+    # Tracer le polynome de Lagrange et les points de donnees
+        plt.plot(x_vals, y_vals, label=f'Segment {i + 1}', color='red')
 
 # Random Shape
 DrawRandShape()
