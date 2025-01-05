@@ -1,8 +1,8 @@
-import matplotlib.pyplot as plt
 from matplotlib.widgets import Button, TextBox
+import matplotlib.pyplot as plt
 import numpy as np
-import math
 import random
+import math
 
 # Hermite function
 def Hermite(x, ListX, ListY, y_derived):

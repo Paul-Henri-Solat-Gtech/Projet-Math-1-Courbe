@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import math
-from math import*
+
 
 def hermite(x, ListX, ListY, y_derived):
     xi = ListX[0]
